@@ -1,36 +1,35 @@
-  arr.sort((a, b) => a - b);
+function threeSum(arr, target) {
+// write your code here
+	arr.sort((a,b)=>{
+	a-b;	
+	})
+	let closestSum = Infinity;
 
-  // Initialize variables to store the closest sum and its difference from the target.
-  let closestSum = Infinity;
-  let minDiff = Infinity;
+	for(let i=0; i<arr.length-2;i++){
+		let left = i+1;
+		let right = arr.length-1;
 
-  // Iterate through the array with a fixed first element.
-  for (let i = 0; i < arr.length - 2; i++) {
-    // Two pointers approach for the remaining elements.
-    let left = i + 1;
-    let right = arr.length - 1;
+		while(left<right){
+			let sum = arr[i]+arr[left]+arr[right];
+			let diff = Math.abs(target- sum);
 
-    while (left < right) {
-      const sum = arr[i] + arr[left] + arr[right];
-      const diff = Math.abs(sum - target);
+			if(diff===0){
+				return sum;
+			}
+			if(diff<Math.abs(target-closestSum)){
+				closestSum = sum;
+			}
 
-      // Check if the current sum is closer to the target.
-      if (diff < minDiff) {
-        minDiff = diff;
-        closestSum = sum;
-      }
-
-      if (sum < target) {
-        // Move the left pointer to the right to increase the sum.
-        left++;
-      } else {
-        // Move the right pointer to the left to decrease the sum.
-        right--;
-      }
-    }
-  }
-
-  return closestSum;
+			if(sum<target){
+				left++;
+			}
+			else{
+				right--;
+			}
+		}
+	}
+	return closestSum;
+  
 }
 
 module.exports = threeSum;
